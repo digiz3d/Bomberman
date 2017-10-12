@@ -1,0 +1,22 @@
+{
+  "name": "bomberman",
+  "version": "1.0.0",
+  "description": "Tp Bomberman",
+  "main": "Bomberman.js",
+  "scripts": {
+    "start": "tsc script.ts -module UMD -w | http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UndoRenegat/Bomberman.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UndoRenegat/Bomberman/issues"
+  },
+  "homepage": "https://github.com/UndoRenegat/Bomberman#readme",
+  "dependencies": {
+    "concurrently": "^3.5.0"
+  }
+}
