@@ -24,11 +24,53 @@ class Game {
         this.canvas.drawCharacter(this.enemy.getCoords(), "red");
         this.weapon = new Weapon(this.terrain.getRandomFreeCell(false));
         this.canvas.drawWeapon(this.weapon.getCoords(), "green");
+
+        setInterval(() => { /* bon on sait que c'est moche mais il est tard lol */
+            let x = Math.floor(Math.random() * 4);
+            let coords = this.enemy.getCoords();
+            switch(x) {
+                case 0:
+                    if (this.terrain.isCellWalkable({ x: coords.x, y: coords.y - 1 })) {
+                        this.enemy.setCoords({ x: coords.x, y: coords.y - 1 });
+                        this.terrain.setCellWalkable({ x: coords.x, y: coords.y - 1 }, false);
+                        this.terrain.setCellWalkable({ x: coords.x, y: coords.y }, true);
+                    }
+                break;
+                case 1:
+                    if (this.terrain.isCellWalkable({ x: coords.x + 1, y: coords.y })) {
+                        this.enemy.setCoords({ x: coords.x + 1, y: coords.y });
+                        this.terrain.setCellWalkable({ x: coords.x + 1, y: coords.y }, false);
+                        this.terrain.setCellWalkable({ x: coords.x, y: coords.y }, true);
+                    }
+                break;
+                case 2:
+                    if (this.terrain.isCellWalkable({ x: coords.x, y: coords.y + 1 })) {
+                        this.enemy.setCoords({ x: coords.x, y: coords.y + 1 });
+                        this.terrain.setCellWalkable({ x: coords.x, y: coords.y + 1 }, false);
+                        this.terrain.setCellWalkable({ x: coords.x, y: coords.y }, true);
+                    }
+                break;
+                case 3:
+                    if (this.terrain.isCellWalkable({ x: coords.x - 1, y: coords.y })) {
+                        this.enemy.setCoords({ x: coords.x - 1, y: coords.y });
+                        this.terrain.setCellWalkable({ x: coords.x - 1, y: coords.y }, false);
+                        this.terrain.setCellWalkable({ x: coords.x, y: coords.y }, true);
+                    }
+                break;
+            }
+            this.canvas.clearCanvas();
+            this.canvas.drawTerrain(this.terrain.getTerrain());
+            this.canvas.drawCharacter(this.bomberman.getCoords(), "blue");
+            this.canvas.drawCharacter(this.enemy.getCoords(), "red");
+            this.canvas.drawWeapon(this.weapon.getCoords(), "green");
+        },1000);
     }
+
     theEnd(): void {
         alert("GG :)");
         document.location = document.location;
     }
+
     keyDownHandler(key: String) {
         let coords = this.bomberman.getCoords();
         switch (key) {
